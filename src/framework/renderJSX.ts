@@ -1,4 +1,4 @@
-import preact, { FunctionComponent, h, JSX, RenderableProps } from "preact";
+import { FunctionComponent, RenderableProps } from "preact";
 import { Response } from "express";
 import { render } from "preact-render-to-string";
 
