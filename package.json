@@ -1,5 +1,5 @@
 {
-  "name": "htmexpress",
+  "name": "express-jsx",
   "version": "1.0.0",
   "description": "",
   "private": true,
@@ -7,7 +7,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "npm run build && node lib/index.js",
     "transpile": "babel src --out-dir lib --extensions '.ts,.tsx'",
-    "build": "npm run tailwind && npm run transpile && npx webpack",
+    "build": "npm run tailwind & npm run transpile && npx webpack",
     "dev": "nodemon --watch 'src/**/*' -e ts,tsx --exec \"npm run start\"",
     "tsc": "tsc",
     "tailwind": "npx tailwindcss -i ./src/static/index.css -o ./lib/static/index.css"
