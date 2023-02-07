@@ -31,7 +31,7 @@ if (cluster.isPrimary) {
       HomePage,
       {
         props: {},
-        title: "Kucingk",
+        title: "My Home Page",
       },
     );
   });
