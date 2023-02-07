@@ -22,8 +22,8 @@ if (cluster.isPrimary) {
 } else {
   const express = Express();
 
-  const pubdir = path.join(__dirname, "public");
-  express.use("/public", Express.static(pubdir));
+  express.use("/static", Express.static(path.join(__dirname, "static")));
+  express.use("/public", Express.static("./public"));
 
   express.get("/", async (req, res, next) => {
     renderJSX(
