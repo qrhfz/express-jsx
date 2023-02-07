@@ -34,6 +34,7 @@ export function renderJSX<T = {}>(
     <link rel="stylesheet" href="/static/index.css">
     ${metaTags(metas)}
   </head>
+  <script src="/static/preact.js" ></script>
   <body>
     ${render(el)}
   </body>
