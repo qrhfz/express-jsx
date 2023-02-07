@@ -1,6 +1,5 @@
 import { render } from "preact";
-import { FC } from "preact/compat";
-import { useState } from "react";
+import { FC, useState } from "preact/compat";
 
 const clickMeDiv = document.querySelector("#click-me");
 
