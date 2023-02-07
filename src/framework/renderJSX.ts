@@ -2,24 +2,6 @@ import { FunctionComponent, RenderableProps } from "preact";
 import { Response } from "express";
 import { render } from "preact-render-to-string";
 
-const html = `
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="icon" type="image/x-icon" href="/public/favicon.ico">
-  <title>{{title}}</title>
-  <link rel="stylesheet" href="/static/index.css">
-  {{head}}
-</head>
-<body>
-  {{embed}}
-</body>
-</html>
-`;
-
 export type Meta = { name: string; content: string };
 
 export type Opts<T> = {
@@ -37,17 +19,27 @@ export function renderJSX<T = {}>(
 
   const el = component(props);
 
-  res.type("html");
-
   if (!el) {
     throw new Error("failed to render");
   }
 
-  const rendered = html
-    .replace("{{embed}}", render(el))
-    .replace("{{title}}", title ?? "Document")
-    .replace("{{head}}", metaTags(metas));
+  const rendered = `<!DOCTYPE html>
+  <html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/x-icon" href="/public/favicon.ico">
+    <title>${title ?? "Document"}</title>
+    <link rel="stylesheet" href="/static/index.css">
+    ${metaTags(metas)}
+  </head>
+  <body>
+    ${render(el)}
+  </body>
+  </html>`;
 
+  res.type("html");
   res.send(rendered);
 }
 
