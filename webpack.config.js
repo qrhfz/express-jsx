@@ -23,10 +23,11 @@ module.exports = {
       }
     ],
   },
-  entry: glob.sync('./src/static/*.tsx').reduce((acc, path) => {
-    const entry = path.replace('.tsx', '')
+  entry: glob.sync('./src/static/*.tsx').reduce((acc, p) => {
+    const entry = p.replace('.tsx', '').replace('./src/static/', '')
+
     acc[entry] = {
-      import: path,
+      import: p,
       dependOn: "preact",
     }
     return acc
