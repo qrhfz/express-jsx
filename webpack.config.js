@@ -25,16 +25,20 @@ module.exports = {
       }
     ],
   },
-  entry: glob.sync('./src/static/*.{ts,tsx}').reduce((acc, p) => {
-    const entry = p.replace('.tsx', '')
-      .replace('.ts', '')
-      .replace('./src/static/', '')
+  entry: {
+    shared: ['preact', '@preact/signals'],
+    ...glob.sync('./src/static/*.{ts,tsx}').reduce((acc, p) => {
+      const entry = p.replace('.tsx', '')
+        .replace('.ts', '')
+        .replace('./src/static/', '')
 
-    acc[entry] = {
-      import: p
-    }
-    return acc
-  }, {}),
+      acc[entry] = {
+        import: p,
+        dependOn: 'shared',
+      }
+      return acc
+    }, {})
+  },
 
   output: {
     filename: '[name].js',
@@ -48,4 +52,7 @@ module.exports = {
     usedExports: true,
     sideEffects: false
   },
+  resolve: {
+    extensions: ['.ts', '.js', 'tsx'],
+  }
 };

@@ -18,6 +18,7 @@ export function jsxViewEngine(filePath: any, options: any, callback: any) {
       </head>
       <body>
         ${render(el)}
+      <script src="/static/shared.js"></script>
       </body>
       </html>`;
 
