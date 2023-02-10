@@ -18,7 +18,6 @@ export function jsxViewEngine(filePath: any, options: any, callback: any) {
       </head>
       <body>
         ${render(el)}
-        <script src="/static/preact.js" defer></script>
       </body>
       </html>`;
 
