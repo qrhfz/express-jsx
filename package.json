@@ -6,9 +6,11 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node lib/index.js",
-    "build": "pnpm tsc; pnpm webpack; pnpm tw",
-    "dev": "nodemon --watch 'src/**/*' -e ts,tsx --exec \"pnpm build && pnpm start\"",
-    "tw": "npx tailwindcss -i ./src/static/index.css -o ./lib/static/index.css"
+    "build": "pnpm tsc; pnpm webpack; pnpm tw:prod",
+    "build:dev": "pnpm tsc; pnpm webpack; pnpm tw",
+    "dev": "nodemon --watch 'src/**/*' -e ts,tsx --exec \"pnpm build:dev && pnpm start\"",
+    "tw": "npx tailwindcss -i ./src/static/index.css -o ./lib/static/index.css",
+    "tw:prod": "npx tailwindcss -i ./src/static/index.css -o ./lib/static/index.css --minify"
   },
   "keywords": [],
   "author": "",
