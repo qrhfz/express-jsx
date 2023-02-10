@@ -11,6 +11,8 @@ module.exports = {
         use: {
           loader: 'babel-loader',
           options: {
+            cacheCompression: false,
+            cacheDirectory: path.resolve(__dirname, '.temp_cache'),
             presets: ['@babel/preset-typescript', '@babel/preset-env'],
             plugins: [
               ["@babel/plugin-transform-react-jsx", {
@@ -20,18 +22,7 @@ module.exports = {
             ]
           }
         }
-      },
-      {
-        test: /\.m?js$/,
-
-        exclude: /node_modules/
-        ,
-        loader: 'babel-loader',
-        options: {
-          cacheCompression: false,
-          cacheDirectory: true,
-        },
-      },
+      }
     ],
   },
   entry: glob.sync('./src/static/*.tsx').reduce((acc, p) => {
