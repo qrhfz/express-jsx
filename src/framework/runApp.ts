@@ -1,21 +1,24 @@
 import cluster from "cluster";
 import os from "os";
 import path from "path";
-import Express from "express";
+import Express, { Router } from "express";
 import { jsxViewEngine } from "./jsx-view-engine";
 import compression from "compression";
 import morgan from "morgan";
 import bodyParser from "body-parser";
 
-export function runApp(
-  { port, clustering }: { port: number | string; clustering: boolean },
-  callback: (express: Express.Express) => void
-) {
+type RunAppConf = {
+  port: number | string;
+  clustering: boolean;
+  router: Router;
+};
+
+export function runApp({ port, clustering, router }: RunAppConf) {
   if (clustering && cluster.isPrimary) {
     startWorkers();
   } else {
     const express = createExpress();
-    callback(express);
+    express.use(router);
     express.listen(port);
   }
 }
