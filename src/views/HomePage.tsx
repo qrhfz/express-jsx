@@ -1,6 +1,6 @@
 import { FC } from "preact/compat"
 
-export const HomePage: FC<{}> = ({ }) => {
+const HomePage: FC<{}> = ({ }) => {
 
   return (
     <div className="h-screen w-screen bg-teal-500 pt-64 pl-24">
@@ -15,3 +15,4 @@ export const HomePage: FC<{}> = ({ }) => {
     </div>
   )
 }
+export default HomePage

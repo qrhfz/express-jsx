@@ -2,10 +2,11 @@ import cluster from "cluster";
 import os from "os";
 import path from "path";
 import Express from "express";
+import { jsxViewEngine } from "./jsx-view-engine";
 
 export function runApp(
   callback: (express: Express.Express) => void,
-  { port }: { port: number },
+  { port }: { port: number }
 ) {
   if (cluster.isPrimary) {
     const totalCpus = os.cpus().length;
@@ -26,9 +27,13 @@ export function runApp(
 
     express.use(
       "/static",
-      Express.static(path.join(__dirname, "..", "static")),
+      Express.static(path.join(__dirname, "..", "static"))
     );
     express.use("/public", Express.static("./public"));
+
+    express.engine("js", jsxViewEngine);
+    express.set("views", path.resolve(__dirname, "..", "views"));
+    express.set("view engine", "js");
 
     callback(express);
 
