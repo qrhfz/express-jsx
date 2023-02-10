@@ -16,5 +16,8 @@
     "strict": true,
     "skipLibCheck": true,
     "baseUrl": "./",
-  }
+  },
+  "exclude": [
+    "src/static/**.*.{ts,tsx}"
+  ]
 }
