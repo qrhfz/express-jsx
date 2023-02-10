@@ -3,6 +3,9 @@ import os from "os";
 import path from "path";
 import Express from "express";
 import { jsxViewEngine } from "./jsx-view-engine";
+import compression from "compression";
+import morgan from "morgan";
+import bodyParser from "body-parser";
 
 export function runApp(
   { port, clustering }: { port: number | string; clustering: boolean },
@@ -19,6 +22,12 @@ export function runApp(
 
 function createExpress() {
   const express = Express();
+
+  express.use(morgan("common"));
+  express.use(compression());
+
+  express.use(bodyParser.urlencoded({ extended: false }));
+  express.use(bodyParser.json());
 
   express.use("/static", Express.static(path.join(__dirname, "..", "static")));
   express.use("/public", Express.static("./public"));
