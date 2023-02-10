@@ -1,4 +1,5 @@
 import { render } from "preact-render-to-string";
+import { minify } from "html-minifier";
 
 export function jsxViewEngine(filePath: any, options: any, callback: any) {
   import(filePath).then((module) => {
@@ -15,13 +16,16 @@ export function jsxViewEngine(filePath: any, options: any, callback: any) {
         <title>${options.title ?? "Document"}</title>
         <link rel="stylesheet" href="/static/index.css">
       </head>
-      <script src="/static/preact.js" ></script>
       <body>
         ${render(el)}
+        <script src="/static/preact.js" defer></script>
       </body>
       </html>`;
 
-      callback(null, rendered);
+      callback(
+        null,
+        minify(rendered, { removeComments: true, collapseWhitespace: true })
+      );
     } catch (error) {
       return callback(error);
     }
