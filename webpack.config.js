@@ -25,15 +25,16 @@ module.exports = {
       }
     ],
   },
-  entry: glob.sync('./src/static/*.tsx').reduce((acc, p) => {
-    const entry = p.replace('.tsx', '').replace('./src/static/', '')
+  entry: glob.sync('./src/static/*.{ts,tsx}').reduce((acc, p) => {
+    const entry = p.replace('.tsx', '')
+      .replace('.ts', '')
+      .replace('./src/static/', '')
 
     acc[entry] = {
-      import: p,
-      dependOn: "preact",
+      import: p
     }
     return acc
-  }, { preact: { import: ['preact', '@preact/signals'] } }),
+  }, {}),
 
   output: {
     filename: '[name].js',
