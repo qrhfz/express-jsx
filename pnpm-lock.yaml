@@ -6,6 +6,7 @@ specifiers:
   '@babel/plugin-transform-react-jsx': ^7.20.13
   '@babel/preset-env': ^7.20.2
   '@babel/preset-typescript': ^7.18.6
+  '@preact/signals': ^1.1.3
   '@types/express': ^4.17.17
   '@types/node': ^18.11.19
   '@types/react': ^18.0.27
@@ -25,6 +26,7 @@ specifiers:
   webpack-cli: ^5.0.1
 
 dependencies:
+  '@preact/signals': 1.1.3_preact@10.11.3
   express: 4.18.2
   preact: 10.11.3
   preact-render-to-string: 5.2.6_preact@10.11.3
@@ -1379,6 +1381,19 @@ packages:
     peerDependencies:
       preact: '*'
     dependencies:
+      preact: 10.11.3
+    dev: false
+
+  /@preact/signals-core/1.2.3:
+    resolution: {integrity: sha512-Kui4p7PMcEQevBgsTO0JBo3gyQ88Q3qzEvsVCuSp11t0JcN4DmGCTJcGRVSCq7Bn7lGxJBO+57jNSzDoDJ+QmA==}
+    dev: false
+
+  /@preact/signals/1.1.3_preact@10.11.3:
+    resolution: {integrity: sha512-N09DuAVvc90bBZVRwD+aFhtGyHAmJLhS3IFoawO/bYJRcil4k83nBOchpCEoS0s5+BXBpahgp0Mjf+IOqP57Og==}
+    peerDependencies:
+      preact: 10.x
+    dependencies:
+      '@preact/signals-core': 1.2.3
       preact: 10.11.3
     dev: false
 

@@ -2,7 +2,7 @@ const path = require("path")
 const glob = require('glob')
 
 module.exports = {
-  mode: 'production',
+  mode: process.env.NODE_ENV || 'development',
   module: {
     rules: [
       {
@@ -15,12 +15,23 @@ module.exports = {
             plugins: [
               ["@babel/plugin-transform-react-jsx", {
                 "runtime": "automatic",
-                "importSource": "preact/compat",
+                "importSource": "preact",
               }]
             ]
           }
         }
-      }
+      },
+      {
+        test: /\.m?js$/,
+
+        exclude: /node_modules/
+        ,
+        loader: 'babel-loader',
+        options: {
+          cacheCompression: false,
+          cacheDirectory: true,
+        },
+      },
     ],
   },
   entry: glob.sync('./src/static/*.tsx').reduce((acc, p) => {
@@ -31,10 +42,18 @@ module.exports = {
       dependOn: "preact",
     }
     return acc
-  }, { preact: { import: 'preact/compat' } }),
+  }, { preact: { import: ['preact', '@preact/signals'] } }),
 
   output: {
     filename: '[name].js',
     path: path.resolve(__dirname, 'lib/static'),
+  },
+  cache: {
+    type: 'filesystem',
+    cacheDirectory: path.resolve(__dirname, '.temp_cache'),
+  },
+  optimization: {
+    usedExports: true,
+    sideEffects: false
   },
 };
